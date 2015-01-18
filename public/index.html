@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<title>tuofuse</title>
+		<meta charset="UTF-8">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="shortcut icon" href="images/favicon.ico">
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/app.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+		<div class='container'>
+
+			<div class="row">
+			    <div class="col-lg-4">
+
+		            <label>Inventory</label>
+		            <br />
+		            <textarea name='inventory' id='inventory'></textarea>
+		            <br />
+
+		            <input type="checkbox" class="checkbox-quad"> Hide Quads
+		            <input type="checkbox" class="checkbox-dual"> Hide Duals
+
+		            <br />
+		            <br />
+		            <button class="btn btn-danger btn-find-fusion-recipes">Submit</button>
+		            <p><br /><b>How to use:</b></p>
+		            <p>Input inventory in the following format:</p>
+		            <p>Blackrock<br/>Blackrock<br />Tiamat</p>
+		            <p><b>Legend:</b></p>
+		            <p class="alert-success alert"><span class="pull-right glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>You have or can make this card.</p>
+		            <p class="alert-warning alert"><span class="pull-right glyphicon glyphicon-thumbs-right" aria-hidden="true"></span>You're missing a card to make this.</p>
+		            <p class="alert-danger alert"><span class="pull-right glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>You don't have this card.</p>
+
+			    </div>
+			    <div class="col-lg-4 fusion-recipes-results">
+			    </div>
+			    <div class="col-lg-4">
+			    	<div class='errors-placeholder'>
+			    	</div>
+
+			        <h4>Long term goal</h4>
+			        <p>To build a tool to help you figure out what you can fuse, what cards you need to build an awesome card. And to eventually help you decide which card to make, with the help of tu_optimize.</p>
+			        
+			        <h4>Todo</h4>
+			        <ul>
+			            <li>Sort/filter by faction</li>
+			            <li>Make is crawl fusions from the top/down instead of down/up</li>
+			            <li>Show number of specific fusion you can make.</li>
+			            <li>Add filter hide/show by skill.</li>
+			            <li>Show SP cost</li>
+			            <li>Add simulator.</li>
+			        </ul>
+
+			        <h4>Changelog</h4>
+
+			        <b>v0.7</b>
+			        <ul>
+			        	<li>Rewrote everything in node</li>
+			        </ul>
+
+			        <b>v0.1-v0.6</b>
+			        <ul>
+			            <li>(v) Fixed bug with Tikal and Halesurge</li>
+			            <li>Added filter show/hide duals.</li>
+			            <li>Added filter show/hide quads.</li>
+			            <li>(v) Added support for TUO notation "tiamat(2)" and "Tiamat (2)".</li>        
+			            <li>(v) Added support for TUO notation: show level (tiamat-1) and quantity (tiamat #2 or tiamat x2).</li>
+			            <li>(v) Added icons to colors.</li>
+			            <li>(v) Data persists in Textarea now.</li>
+			            <li>(v) Fixed bug with Capitalized cards not recongnized.</li>
+			            <li>(v) Added todo.</li>
+			            <li>(v) Added changelog.</li>
+			            <li>(v) Removed case sensitivity.</li>
+			            <li>Removed duplicate fusions.</li>
+			            <li>(v) Notify and remove cards not recongize (and whitespace). </li>
+			            <li>Add basic functionality</li>
+			        </ul>
+
+			    </div>
+		    </div>
+		</div>
+
+	    <script id="fusion-recipe-template" type="text/x-handlebars-template">
+		    <table class="table table-condensed fusion-level-dual">
+		        <thead>
+		            <tr>
+		                <th>fusion recipe name dual</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        </tbody>
+		    </table>
+		</script>
+
+	    <script id="resource-template" type="text/x-handlebars-template">
+	        <tr>
+	            <td class="success"><span class="pull-right glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>resource name and amount</td>
+	        </tr>
+	        <tr>
+	            <td class="danger"><span class="pull-right glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>resource name and amount</td>
+	        </tr>
+	        <tr>
+	            <td class="warning"><span class="pull-right glyphicon glyphicon-thumbs-right" aria-hidden="true"></span>resource name and amount</td>
+	        </tr>
+        </script>
+
+        <script id="error-template" type="text/x-handlebars-template">        
+	        <div class="well">
+	            <h4>Following cards not recognized</h4>
+  				{{#each errors}}
+	            <ul>
+	            	<li>{{name}}</li>
+	            </ul>
+	            {{/each}}
+	        </div>
+        </script>
+
+	    <script src='js/lib/jquery.min.js'></script>
+    	<script src="js/lib/bootstrap.min.js"></script>
+	    <script src='js/lib/underscore-min.js'></script>
+	    <script src='js/lib/handlebars-v2.0.0.js'></script>
+	    <script src='js/xmlToJson.js'></script>
+	    <script src='js/app.js'></script>
+	</body>
+</html>
