@@ -105,6 +105,10 @@ $('.btn-find-fusion-recipes').on('click', function(){
   console.log("done!")
 })
 
+// there is a bug with this.... (TODO: fix bug that makes quads think we have a dual, which we don't)
+// e.g. test with:
+// Apex
+// Genetics Pit
 function getQuantity(possible_fusion) {
   var smallest = 999
   _.each(possible_fusion.unit_resources, function(unit_resource) {
