@@ -203,6 +203,7 @@ function getFusionsViewModel(){
     _.each(fusion.unit_resources, function(unit_resource){
       viewModel.resources.push({
         status: unit_resource.haveOrMakeCard.type == "cannot" ? "danger" : (unit_resource.haveOrMakeCard.quantity >= (unit_resource.resource["@attributes"] != undefined ? unit_resource.resource["@attributes"].number : unit_resource.resource.number) ? "success" : "warning"),
+        thumb: unit_resource.haveOrMakeCard.type == "cannot" ? "down" : (unit_resource.haveOrMakeCard.quantity >= (unit_resource.resource["@attributes"] != undefined ? unit_resource.resource["@attributes"].number : unit_resource.resource.number) ? "up" : "right"),
         name: unit_resource.unit.name["#text"],
         number: unit_resource.resource.number
       })
