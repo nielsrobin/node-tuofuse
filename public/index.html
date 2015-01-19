@@ -63,19 +63,19 @@
 
 			        <b>v0.1-v0.6</b>
 			        <ul>
-			            <li>(v) Fixed bug with Tikal and Halesurge</li>
+			            <li>Fixed bug with Tikal and Halesurge</li>
 			            <li>Added filter show/hide duals.</li>
 			            <li>Added filter show/hide quads.</li>
-			            <li>(v) Added support for TUO notation "tiamat(2)" and "Tiamat (2)".</li>        
-			            <li>(v) Added support for TUO notation: show level (tiamat-1) and quantity (tiamat #2 or tiamat x2).</li>
-			            <li>(v) Added icons to colors.</li>
-			            <li>(v) Data persists in Textarea now.</li>
-			            <li>(v) Fixed bug with Capitalized cards not recongnized.</li>
-			            <li>(v) Added todo.</li>
-			            <li>(v) Added changelog.</li>
-			            <li>(v) Removed case sensitivity.</li>
+			            <li>Added support for TUO notation "tiamat(2)" and "Tiamat (2)".</li>        
+			            <li>Added support for TUO notation: show level (tiamat-1) and quantity (tiamat #2 or tiamat x2).</li>
+			            <li>Added icons to colors.</li>
+			            <li>Data persists in Textarea now.</li>
+			            <li>Fixed bug with Capitalized cards not recongnized.</li>
+			            <li>Added todo.</li>
+			            <li>Added changelog.</li>
+			            <li>Removed case sensitivity.</li>
 			            <li>Removed duplicate fusions.</li>
-			            <li>(v) Notify and remove cards not recongize (and whitespace). </li>
+			            <li>Notify and remove cards not recongize (and whitespace). </li>
 			            <li>Add basic functionality</li>
 			        </ul>
 
@@ -84,28 +84,23 @@
 		</div>
 
 	    <script id="fusion-recipe-template" type="text/x-handlebars-template">
-		    <table class="table table-condensed fusion-level-dual">
+			{{#each fusionViewModels}}	    	
+		    <table class="table table-condensed fusion-level-{{fusion_level}}">
 		        <thead>
 		            <tr>
-		                <th>fusion recipe name dual</th>
+		                <th>{{name}}</th>
 		            </tr>
 		        </thead>
 		        <tbody>
+					{{#each resources}}	    	    
+			        <tr>
+		            	<td class={{status}}><span class="pull-right glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>{{name}} {{number}}</td>
+			        </tr>
+        			{{/each}}
 		        </tbody>
 		    </table>
+            {{/each}}
 		</script>
-
-	    <script id="resource-template" type="text/x-handlebars-template">
-	        <tr>
-	            <td class="success"><span class="pull-right glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>resource name and amount</td>
-	        </tr>
-	        <tr>
-	            <td class="danger"><span class="pull-right glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>resource name and amount</td>
-	        </tr>
-	        <tr>
-	            <td class="warning"><span class="pull-right glyphicon glyphicon-thumbs-right" aria-hidden="true"></span>resource name and amount</td>
-	        </tr>
-        </script>
 
         <script id="error-template" type="text/x-handlebars-template">        
 	        <div class="well">
