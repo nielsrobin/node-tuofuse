@@ -32,18 +32,19 @@ $('.btn-find-fusion-recipes').on('click', function(){
       // check for TUO notation: Tiamat (2), Tiamat #2
       if(name.split("#").length > 1) {
         var temp = name.split("#")
-        name = temp[0].replace(" ","")
+        name = temp[0].substr(temp[0].length-1, 1) == " " ? temp[0].substr(0, temp[0].length-1) : temp[0]
         quantity = temp[1]
       }
       else if(name.split("(").length > 1) {
         var temp = name.split("(")
-        name = temp[0].replace(" ","")
+        name = temp[0].substr(temp[0].length-1, 1) == " " ? temp[0].substr(0, temp[0].length-1) : temp[0]
         quantity = temp[1].split(")")[0]
       }
 
       // check for TUO noation: Tiamat-1 (eight cards have '-' in their name, so we have to validate against that)
       if(name.split("-").length > 1 && name.length - name.indexOf('-') <= 3) {
-        name = name.split("-")[0].replace(" ","")
+        name = name.split("-")[0]
+        name = name.substr(name.length-1, 1) == " " ? name.substr(0, name[0].length-1) : name
       }
 
       // find card in card database
@@ -93,7 +94,7 @@ $('.btn-find-fusion-recipes').on('click', function(){
 
   // hack to get quads (TODO: find a better way)
   _.each(possible_fusions, function(possible_fusion) {
-    inventory.push({unit: possible_fusion.unit, quantity: getQuantity(possible_fusion)})
+    inventory.push({unit: possible_fusion.unit, quantity: getQuantity(possible_fusion).quantity})
   })
   possible_fusions = []
 
@@ -155,7 +156,7 @@ function haveOrMakeCard (card_id) {
     return inventory_item.unit.id["#text"] == card_id
   })
   if(unitInInventory.length > 0) {
-    return { type: "have", quantity: _.reduce(unitInInventory, function(memo, num){ return memo + num.quantity }, 0)}
+    return { type: "have", quantity: _.reduce(unitInInventory, function(memo, num){ return memo - (-num.quantity) }, 0)}
   }
 
   // can we make the unit? (replaced by quad-hack)
@@ -205,7 +206,7 @@ function getFusionsViewModel(){
         status: unit_resource.haveOrMakeCard.type == "cannot" ? "danger" : (unit_resource.haveOrMakeCard.quantity >= (unit_resource.resource["@attributes"] != undefined ? unit_resource.resource["@attributes"].number : unit_resource.resource.number) ? "success" : "warning"),
         thumb: unit_resource.haveOrMakeCard.type == "cannot" ? "down" : (unit_resource.haveOrMakeCard.quantity >= (unit_resource.resource["@attributes"] != undefined ? unit_resource.resource["@attributes"].number : unit_resource.resource.number) ? "up" : "right"),
         name: unit_resource.unit.name["#text"],
-        number: unit_resource.resource.number
+        number: unit_resource.resource.number == undefined ? "" : "#" + unit_resource.resource.number
       })
     })
 
